@@ -7,7 +7,7 @@
 	(See also : http://opensource.org/licenses/mit-license.php)
 */
 
-#define _DEBUG false
+#define _DEBUG true
 
 // 標準ライブラリ
 #include <ctype.h>

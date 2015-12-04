@@ -8,6 +8,8 @@
 #ifndef _PLEN2__PIN_H_
 #define _PLEN2__PIN_H_
 
+#include <Arduino.h>
+
 namespace PLEN2
 {
 	/*!
@@ -45,7 +47,7 @@ namespace PLEN2
 		inline static const int PWM_OUT_16_23()       { return 9;  }
 
 		//! @brief シリアルの出力方向選択
-		inline static const int RS485_TXD()           { return 4;  }
+		inline static const int RS485_TXD()           { return A0;  }
 
 		//! @brief LEDの出力先
 		inline static const int LED_OUT()             { return 13; }

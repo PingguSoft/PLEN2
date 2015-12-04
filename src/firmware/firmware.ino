@@ -7,7 +7,7 @@
 	(See also : http://opensource.org/licenses/mit-license.php)
 */
 
-#define _DEBUG false
+#define _DEBUG true
 
 /*!
 	@note
@@ -23,6 +23,11 @@
 // Arduinoライブラリ
 #include <EEPROM.h>
 #include <Wire.h>
+
+#if 1
+#include <SPI.h>
+#include "sdcard/Sd2Card.h"
+#endif
 
 // 独自ライブラリ
 #include "Interpreter.h"
@@ -577,6 +582,46 @@ namespace
 	Application app_ctrl;
 }
 
+#if 1
+// WIFI Module-D7(IRQ),D5(VBAT),D10(CS),D14(MISO),D15(SCK),D16(MOSI)
+// MicroSD-D4(CS),D14(MISO),D15(SCK),D16(MOSI)
+Sd2Card card;
+
+void sd_test(void)
+{
+  const int chipSelect = 4;
+  
+  Serial.print("\nInitializing SD card...");
+
+  // we'll use the initialization code from the utility libraries
+  // since we're just testing if the card is working!
+  if (!card.init(SPI_HALF_SPEED, chipSelect)) {
+    Serial.println("initialization failed. Things to check:");
+    Serial.println("* is a card inserted?");
+    Serial.println("* is your wiring correct?");
+    Serial.println("* did you change the chipSelect pin to match your shield or module?");
+    return;
+  } else {
+    Serial.println("Wiring is correct and a card is present.");
+  }
+
+  // print the type of card
+  Serial.print("\nCard type: ");
+  switch (card.type()) {
+    case SD_CARD_TYPE_SD1:
+      Serial.println("SD1");
+      break;
+    case SD_CARD_TYPE_SD2:
+      Serial.println("SD2");
+      break;
+    case SD_CARD_TYPE_SDHC:
+      Serial.println("SDHC");
+      break;
+    default:
+      Serial.println("Unknown");
+  }
+}
+#endif
 
 /*!
 	@brief 初期化メソッド
@@ -613,6 +658,7 @@ void setup()
 	動作を強制終了したい場合、exit()命令を使用する必要があります。
 	return命令では、再度ループが実行されてしまいます。
 */
+
 void loop()
 {
 	if (motion_ctrl.playing())

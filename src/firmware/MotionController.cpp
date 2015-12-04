@@ -18,7 +18,7 @@
 
 
 // マクロの定義
-#define _DEBUG      false
+#define _DEBUG      true
 #define _DEBUG_HARD false
 
 

@@ -7,7 +7,7 @@
 	(See also : http://opensource.org/licenses/mit-license.php)
 */
 
-#define _DEBUG false
+#define _DEBUG true
 
 // 独自ライブラリ
 #if _DEBUG
