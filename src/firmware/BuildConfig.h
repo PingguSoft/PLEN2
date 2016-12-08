@@ -35,7 +35,7 @@
     If you enable this macro, it changes following feature(s):
     - Serial communication speed
 */
-#define TARGET_DEVELOPER_EDITION true
+#define TARGET_DEVELOPER_EDITION false
 
 /*!
     @brief Configuration macro to build the firmware for mirror edition

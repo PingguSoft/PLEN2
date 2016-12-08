@@ -7,7 +7,7 @@
     (See also : http://opensource.org/licenses/mit-license.php)
 */
 
-#define DEBUG      false
+#define DEBUG      true
 #define DEBUG_HARD false
 
 #include <Arduino.h>

@@ -53,7 +53,7 @@ namespace PLEN2
         enum { LED_OUT = 13 };
 
         //! @brief Input of random-device (Get an open circuit voltage.)
-        enum { RANDOM_DEVICE_IN = 6 };
+        enum { RANDOM_DEVICE_IN = 21 };
 
         enum { SD_CS = 18 };
     }

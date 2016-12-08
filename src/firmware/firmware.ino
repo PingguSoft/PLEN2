@@ -20,7 +20,6 @@
 #include <string.h>
 
 #include <EEPROM.h>
-#include <Wire.h>
 
 #include "ExternalSD.h"
 #include "JointController.h"

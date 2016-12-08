@@ -7,7 +7,7 @@
     (See also : http://opensource.org/licenses/mit-license.php)
 */
 
-#define DEBUG      true
+#define DEBUG false
 #define DEBUG_HARD false
 
 #include <avr/pgmspace.h>
@@ -162,16 +162,29 @@ void PLEN2::JointController::loadSettings()
     */
     cli();
 
+#if 0
     TCCR1A =
-        _BV(WGM11)  | _BV(WGM10)  | // Set mode to "10bit fast PWM".
+        _BV(WGM11)  | _BV(WGM10)  | // Set mode to "10bit fast PWM".  mode 7
         _BV(COM1A1) | _BV(COM1A0) | // Set OC1A to HIGH when compare matched.
         _BV(COM1B1) | _BV(COM1B0) | // Set OC1B to HIGH when compare matched.
         _BV(COM1C1) | _BV(COM1C0);  // Set OC1C to HIGH when compare matched.
 
     TCCR1B =
-        _BV(WGM12) |                // Set mode to "10bit fast PWM".
+        _BV(WGM12) |                // Set mode to "10bit fast PWM".  mode 7
+        _BV(CS11)  | _BV(CS10);     // Set prescaler to 64.
+#else
+    TCCR1A =
+        _BV(WGM11)  |               // Set mode to "fast PWM with ICR".  mode 14
+        _BV(COM1A1) | _BV(COM1A0) | // Set OC1A to HIGH when compare matched.
+        _BV(COM1B1) | _BV(COM1B0) | // Set OC1B to HIGH when compare matched.
+        _BV(COM1C1) | _BV(COM1C0);  // Set OC1C to HIGH when compare matched.
+
+    TCCR1B =
+        _BV(WGM13) | _BV(WGM12)   | // Set mode to "fast PWM with ICR".  mode 14
         _BV(CS11)  | _BV(CS10);     // Set prescaler to 64.
 
+    ICR1 = 0x3ff;
+#endif
     TIFR1 = _BV(OCF1A) | _BV(OCF1B) | _BV(OCF1C) | _BV(TOV1); // Clearing interruption flag.
 
     sei();

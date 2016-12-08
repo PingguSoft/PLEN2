@@ -12,6 +12,7 @@
 
 
 #include <stdint.h>
+#include "Sd2Card.h"
 
 namespace PLEN2
 {
@@ -33,7 +34,7 @@ class PLEN2::ExternalSD
 {
 private:
     //! @brief Size of external EEPROM (bytes)
-    enum { SIZE = 0x20000UL };
+    enum { SIZE = 0x200000UL };
 
     //! @brief Bytes of targeted area address
     enum { ADDRESS_BYTES = 2 };
@@ -41,6 +42,11 @@ private:
     static bool cacheFlush(void);
     static bool cacheRawBlock(uint32_t blockNumber, uint8_t action);
 
+
+    static Sd2Card   mSDCard;
+    static bool      mCacheDirty;
+    static uint32_t  mCacheBlockNumber;
+    static uint8_t   mCacheBuf[512];
 
 public:
     //! @brief Chunk size of external EEPROM (bytes)

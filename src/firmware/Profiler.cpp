@@ -25,7 +25,7 @@ void Utility::Profiler::m_tabbing()
 {
     for (uint16_t i = 0; i < Shared::m_nest; i++)
     {
-        Serial1.write('\t');
+        Serial.write('\t');
     }
 }
 
@@ -33,12 +33,12 @@ void Utility::Profiler::m_tabbing()
 Utility::Profiler::Profiler(const __FlashStringHelper* fsh_ptr)
 {
     m_tabbing();
-    Serial1.print(F(">>> pushed : "));
-    Serial1.println(fsh_ptr);
+    Serial.print(F(">>> pushed : "));
+    Serial.println(fsh_ptr);
 
     m_tabbing();
-    Serial1.print(F("+++ stack ptr : "));
-    Serial1.println(reinterpret_cast<uint16_t>(this), HEX);
+    Serial.print(F("+++ stack ptr : "));
+    Serial.println(reinterpret_cast<uint16_t>(this), HEX);
 
     Shared::m_nest++;
     m_begin = micros();
@@ -51,14 +51,14 @@ Utility::Profiler::~Profiler()
     Shared::m_nest--;
 
     m_tabbing();
-    Serial1.print(F("+++ nest      : "));
-    Serial1.println(Shared::m_nest);
+    Serial.print(F("+++ nest      : "));
+    Serial.println(Shared::m_nest);
 
     m_tabbing();
-    Serial1.print(F("+++ exec time : "));
-    Serial1.print(m_end - m_begin);
-    Serial1.println(F(" [usec]"));
+    Serial.print(F("+++ exec time : "));
+    Serial.print(m_end - m_begin);
+    Serial.println(F(" [usec]"));
 
     m_tabbing();
-    Serial1.println(F("<<< popped"));
+    Serial.println(F("<<< popped"));
 }
