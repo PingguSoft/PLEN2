@@ -43,6 +43,12 @@ volatile bool PLEN2::JointController::m_1cycle_finished = false;
 uint16_t PLEN2::JointController::m_pwms[PLEN2::JointController::JOINTS_SUM];
 
 
+#define US_PERIOD   2560
+#define US_UNIT     (1000000 / (F_CPU / 64))
+#define PWM_MIN     ((US_PERIOD - 2176) / US_UNIT)
+#define PWM_MAX     ((US_PERIOD -  816) / US_UNIT)
+#define PWM_NEUTRAL ((US_PERIOD - 1496) / US_UNIT)
+
 namespace
 {
     namespace Shared
@@ -183,7 +189,7 @@ void PLEN2::JointController::loadSettings()
         _BV(WGM13) | _BV(WGM12)   | // Set mode to "fast PWM with ICR".  mode 14
         _BV(CS11)  | _BV(CS10);     // Set prescaler to 64.
 
-    ICR1 = 0x3ff;
+	ICR1     = (US_PERIOD / US_UNIT) - 1;
 #endif
     TIFR1 = _BV(OCF1A) | _BV(OCF1B) | _BV(OCF1C) | _BV(TOV1); // Clearing interruption flag.
 

@@ -120,6 +120,7 @@ public:
         enum { SELECTABLE_LINES = 8 };
     };
 
+#if 0
     #if TARGET_PLEN14
         //! @brief PWM width that to make min angle
         enum { PWM_MIN = 492 };
@@ -141,6 +142,7 @@ public:
         //! @brief PWM width that to make neutral angle
         enum { PWM_NEUTRAL = 650 };
     #endif
+#endif
 
     /*!
         @brief Finished flag of PWM output procedure 1 cycle
