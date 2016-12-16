@@ -79,7 +79,7 @@ private:
         #if TARGET_DEVELOPER_EDITION
             BLESERIAL_BAUDRATE = 115200L
         #else
-            BLESERIAL_BAUDRATE = 115200L    //2000000L
+            BLESERIAL_BAUDRATE = 57600L    //2000000L
         #endif
     };
 

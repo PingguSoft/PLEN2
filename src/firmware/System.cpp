@@ -63,7 +63,7 @@ Stream& PLEN2::System::outputSerial()
 
 Stream& PLEN2::System::debugSerial()
 {
-    return PLEN2_SYSTEM_BLESERIAL;
+    return PLEN2_SYSTEM_USBSERIAL;
 }
 
 
